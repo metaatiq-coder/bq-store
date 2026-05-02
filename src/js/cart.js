@@ -2,6 +2,33 @@
 
 let cart = [];
 
+// Professional product images for common items (same as products.js)
+const productImages = {
+    'Sugar': 'https://images.unsplash.com/photo-1558642452-9d2a7deb7f62?w=400&h=400&fit=crop',
+    'Tea': 'https://images.unsplash.com/photo-1544787219-7f47ccb76574?w=400&h=400&fit=crop',
+    'Rice': 'https://images.unsplash.com/photo-1586201375761-83865001e31c?w=400&h=400&fit=crop',
+    'Flour': 'https://images.unsplash.com/photo-1509440159596-0249088772ff?w=400&h=400&fit=crop',
+    'Milk': 'https://images.unsplash.com/photo-1550583724-b2692b85b150?w=400&h=400&fit=crop',
+    'Biscuits': 'https://images.unsplash.com/photo-1558961363-fa8fdf82db35?w=400&h=400&fit=crop',
+    'Cold Drink': 'https://images.unsplash.com/photo-1622483767028-3f66f32aef97?w=400&h=400&fit=crop',
+    'Soap': 'https://images.unsplash.com/photo-1556228720-195a672e8a03?w=400&h=400&fit=crop',
+    'Shampoo': 'https://images.unsplash.com/photo-1584464491033-06628f3a6b7b?w=400&h=400&fit=crop',
+    'Toothpaste': 'https://images.unsplash.com/photo-1556228578-0d85b1a4d571?w=400&h=400&fit=crop',
+    'Cooking Oil': 'https://images.unsplash.com/photo-1474979266404-7eaacbcd87c5?w=400&h=400&fit=crop',
+    'Salt': 'https://images.unsplash.com/photo-1558642452-9d2a7deb7f62?w=400&h=400&fit=crop',
+    'Eggs': 'https://images.unsplash.com/photo-1506976785307-8732e854ad03?w=400&h=400&fit=crop',
+    'Bread': 'https://images.unsplash.com/photo-1509440159596-0249088772ff?w=400&h=400&fit=crop',
+    'Juice': 'https://images.unsplash.com/photo-1622483767028-3f66f32aef97?w=400&h=400&fit=crop',
+    'Chips': 'https://images.unsplash.com/photo-1566479179815-4ba6a6c3f5b?w=400&h=400&fit=crop',
+    'Chocolate': 'https://images.unsplash.com/photo-1606312619070-d48b4c652a52?w=400&h=400&fit=crop',
+    'Detergent': 'https://images.unsplash.com/photo-1556228720-195a672e8a03?w=400&h=400&fit=crop',
+    'Tissue': 'https://images.unsplash.com/photo-1585435557343-3b092031e2bb?w=400&h=400&fit=crop',
+    'Water Bottle': 'https://images.unsplash.com/photo-1602143407151-7111542de6e8?w=400&h=400&fit=crop'
+};
+
+// Default product image for missing images
+const defaultProductImage = 'https://images.unsplash.com/photo-1556742049-0cfed4f6a45d?w=400&h=400&fit=crop';
+
 function loadCart() {
     cart = JSON.parse(localStorage.getItem('cart')) || [];
     displayCart();
@@ -26,11 +53,16 @@ function displayCart() {
     cartContainer.innerHTML = '';
 
     cart.forEach((item, index) => {
+        // Ensure image is assigned
+        if (!item.image || item.image.includes('placeholder') || item.image === '') {
+            item.image = productImages[item.name] || defaultProductImage;
+        }
+
         const row = document.createElement('div');
         row.className = 'bg-white rounded border border-gray-200 p-4 flex items-center gap-4 hover:shadow transition';
         
         row.innerHTML = `
-            <img src="${item.image || 'https://via.placeholder.com/80'}" alt="${item.name}" class="w-20 h-20 object-cover rounded" onerror="this.src='https://via.placeholder.com/80'">
+            <img src="${item.image}" alt="${item.name}" class="w-20 h-20 object-cover rounded" onerror="this.src='${defaultProductImage}'">
             <div class="flex-1">
                 <h3 class="font-bold text-gray-900">${item.name}</h3>
                 <p class="text-sm text-gray-600">${formatPrice(item.price)} each</p>

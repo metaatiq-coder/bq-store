@@ -7,68 +7,68 @@
   <link rel="stylesheet" href="src/css/style.css">
 </head>
 
-<body class="flex items-center justify-center min-h-screen bg-gradient-to-br from-black via-slate-900 to-black">
+<body class="flex items-center justify-center min-h-screen bg-gradient-to-br from-gray-50 to-gray-100">
 
-  <div class="w-96 p-8 bg-slate-900 border border-gold/30 rounded-2xl shadow-2xl">
+  <div class="w-full max-w-md p-8 bg-white border border-gold/30 rounded-2xl shadow-2xl">
 
-    <h1 class="text-3xl font-bold mb-2 text-gold text-center">Atiq Super Store</h1>
-    <p class="text-center text-gray-400 mb-8">Customer Login</p>
+    <div class="text-center mb-8">
+      <h1 class="text-4xl font-bold mb-2 text-gold">🏪 Atiq Super Store</h1>
+      <p class="text-gray-600">Secure Customer Login</p>
+    </div>
 
     <!-- LOGIN FORM -->
     <form id="loginForm" class="space-y-4">
 
       <div>
-        <label class="block text-gold font-bold mb-2">Email</label>
+        <label class="block text-gray-700 font-bold mb-2">Email Address</label>
         <input
           id="email"
           type="email"
           placeholder="your@email.com"
-          class="w-full p-3 bg-slate-800 border border-gold/30 rounded-lg text-white focus:outline-none focus:border-gold"
+          class="w-full p-3 bg-gray-50 border border-gray-300 rounded-lg text-gray-900 focus:outline-none focus:border-gold focus:ring-2 focus:ring-gold/20"
           required
         >
       </div>
 
       <div>
-        <label class="block text-gold font-bold mb-2">Password</label>
+        <label class="block text-gray-700 font-bold mb-2">Password</label>
         <input
           id="password"
           type="password"
           placeholder="••••••••"
-          class="w-full p-3 bg-slate-800 border border-gold/30 rounded-lg text-white focus:outline-none focus:border-gold"
+          class="w-full p-3 bg-gray-50 border border-gray-300 rounded-lg text-gray-900 focus:outline-none focus:border-gold focus:ring-2 focus:ring-gold/20"
           required
         >
       </div>
 
       <button
         type="submit"
-        class="w-full bg-gradient-to-r from-gold to-yellow-300 text-black p-3 rounded-lg font-bold hover:shadow-2xl hover:shadow-gold/50 transition disabled:opacity-50 disabled:cursor-not-allowed"
+        class="w-full bg-gradient-to-r from-gold to-yellow-400 text-black p-3 rounded-lg font-bold hover:shadow-lg hover:shadow-gold/30 transition disabled:opacity-50 disabled:cursor-not-allowed"
       >
-        Login
+        Sign In
       </button>
 
       <button
         type="button"
         onclick="window.location.href='products.html'"
-        class="w-full bg-slate-700 hover:bg-slate-600 text-white p-3 rounded-lg font-bold transition"
+        class="w-full bg-gray-200 hover:bg-gray-300 text-gray-800 p-3 rounded-lg font-bold transition"
       >
         Continue as Guest
       </button>
 
-      <p id="error" class="text-red-400 text-sm mt-2 hidden p-3 bg-red-900/20 rounded"></p>
-      <p id="success" class="text-green-400 text-sm mt-2 hidden p-3 bg-green-900/20 rounded"></p>
-
-    </form>
+      <p id="error" class="text-red-600 text-sm mt-2 hidden p-3 bg-red-50 border border-red-200 rounded"></p>
+      <p id="success" class="text-green-600 text-sm mt-2 hidden p-3 bg-green-50 border border-green-200 rounded"></p>
 
     <!-- Demo Users -->
-    <div class="mt-6 pt-6 border-t border-gold/20">
-      <p class="text-gray-400 text-xs mb-3 text-center">Test Accounts:</p>
+    <div class="mt-6 pt-6 border-t border-gray-200">
+      <p class="text-gray-600 text-sm mb-3 text-center">Demo Accounts for Testing:</p>
       
       <div class="space-y-2">
-        <button onclick="fillDemo('customer@atiq.com', 'Customer123!')" class="w-full text-left p-2 text-xs bg-blue-900/30 hover:bg-blue-900/50 text-blue-300 rounded transition border border-blue-700/30">
-          👤 Customer: customer@atiq.com / Customer123!
+        <button onclick="fillDemo('customer@atiq.com', 'Customer123!')" class="w-full text-left p-3 text-sm bg-blue-50 hover:bg-blue-100 text-blue-700 rounded-lg transition border border-blue-200 hover:border-blue-300">
+          👤 <strong>Customer:</strong> customer@atiq.com<br><span class="text-xs text-blue-600">Password: Customer123!</span>
         </button>
-        <button onclick="fillDemo('admin@atiq.com', 'Admin123!')" class="w-full text-left p-2 text-xs bg-purple-900/30 hover:bg-purple-900/50 text-purple-300 rounded transition border border-purple-700/30">
-          🔑 Admin: admin@atiq.com / Admin123!
+        <button onclick="fillDemo('admin@atiq.com', 'Admin123!')" class="w-full text-left p-3 text-sm bg-purple-50 hover:bg-purple-100 text-purple-700 rounded-lg transition border border-purple-200 hover:border-purple-300">
+          🔑 <strong>Admin:</strong> admin@atiq.com<br><span class="text-xs text-purple-600">Password: Admin123!</span>
         </button>
       </div>
     </div>
