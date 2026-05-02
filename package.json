@@ -1,0 +1,12 @@
+{
+  "name": "atiq-super-store",
+  "version": "1.0.0",
+  "description": "Lightweight e-commerce store with Firebase",
+  "main": "index.html",
+  "scripts": {
+    "deploy": "firebase deploy"
+  },
+  "keywords": ["e-commerce", "store", "firebase"],
+  "author": "Atiq",
+  "license": "MIT"
+}

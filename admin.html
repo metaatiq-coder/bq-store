@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Dashboard - Atiq Super Store</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="src/css/style.css">
+</head>
+<body class="bg-white text-gray-900">
+    <!-- Login Section -->
+    <div id="loginSection" class="min-h-screen flex items-center justify-center bg-gray-100">
+        <div class="bg-white border border-gray-200 rounded-lg p-8 max-w-md w-full shadow">
+            <h1 class="text-3xl font-bold text-gold mb-4 text-center">Admin Login</h1>
+            <form id="loginForm" class="space-y-4">
+                <input type="email" id="loginEmail" required placeholder="admin@atiq.com" class="w-full px-4 py-2 border border-gray-300 rounded focus:outline-none focus:border-gold">
+                <input type="password" id="loginPassword" required placeholder="Password" class="w-full px-4 py-2 border border-gray-300 rounded focus:outline-none focus:border-gold">
+                <button type="submit" class="w-full px-4 py-2 bg-gold text-black font-bold rounded hover:bg-yellow-400">Login</button>
+                <p id="loginError" class="text-red-500 text-sm hidden"></p>
+            </form>
+        </div>
+    </div>
+
+    <!-- Admin Section -->
+    <div id="adminSection" class="hidden">
+        <nav class="fixed w-full top-0 z-50 bg-white border-b border-gray-200 shadow">
+            <div class="max-w-6xl mx-auto px-4">
+                <div class="flex justify-between items-center h-16">
+                    <span class="text-xl font-bold text-gold">🏪 Admin Panel</span>
+                    <button id="logoutBtn" class="px-4 py-2 bg-red-500 hover:bg-red-600 text-white font-bold rounded">Logout</button>
+                </div>
+            </div>
+        </nav>
+
+        <div class="pt-20 pb-12 max-w-6xl mx-auto px-4">
+            <!-- Add Product -->
+            <h2 class="text-3xl font-bold text-gold mb-6">Add Product</h2>
+            <form id="productForm" class="bg-gray-50 border border-gray-200 rounded-lg p-6 mb-12">
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-4 mb-4">
+                    <input type="text" id="productName" required placeholder="Product Name" class="px-4 py-2 border border-gray-300 rounded focus:outline-none focus:border-gold">
+                    <input type="number" id="productPrice" required step="0.01" placeholder="Price" class="px-4 py-2 border border-gray-300 rounded focus:outline-none focus:border-gold">
+                </div>
+                <input type="url" id="productImage" placeholder="Image URL" class="w-full px-4 py-2 border border-gray-300 rounded focus:outline-none focus:border-gold mb-4">
+                <textarea id="productDescription" placeholder="Description" rows="3" class="w-full px-4 py-2 border border-gray-300 rounded focus:outline-none focus:border-gold mb-4"></textarea>
+                <button type="submit" class="w-full px-4 py-2 bg-gold text-black font-bold rounded hover:bg-yellow-400">Add Product</button>
+                <p id="formError" class="text-red-500 text-sm hidden mt-2"></p>
+                <p id="formSuccess" class="text-green-500 text-sm hidden mt-2"></p>
+            </form>
+
+            <!-- Products List -->
+            <h2 class="text-3xl font-bold text-gold mb-6">Products</h2>
+            <div id="productsList" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6"></div>
+        </div>
+
+        <!-- Edit Modal -->
+        <div id="editModal" class="hidden fixed inset-0 bg-black/50 flex items-center justify-center z-50 p-4">
+            <div class="bg-white rounded-lg p-6 max-w-md w-full">
+                <h2 class="text-2xl font-bold text-gold mb-4">Edit Product</h2>
+                <form id="editForm" class="space-y-4">
+                    <input type="text" id="editName" required placeholder="Product Name" class="w-full px-4 py-2 border border-gray-300 rounded focus:outline-none focus:border-gold">
+                    <input type="number" id="editPrice" required step="0.01" placeholder="Price" class="w-full px-4 py-2 border border-gray-300 rounded focus:outline-none focus:border-gold">
+                    <input type="url" id="editImage" placeholder="Image URL" class="w-full px-4 py-2 border border-gray-300 rounded focus:outline-none focus:border-gold">
+                    <textarea id="editDescription" placeholder="Description" rows="3" class="w-full px-4 py-2 border border-gray-300 rounded focus:outline-none focus:border-gold"></textarea>
+                    <div class="flex gap-2">
+                        <button type="submit" class="flex-1 px-4 py-2 bg-gold text-black font-bold rounded hover:bg-yellow-400">Save</button>
+                        <button type="button" onclick="closeEditModal()" class="flex-1 px-4 py-2 border border-gray-300 rounded hover:bg-gray-100">Cancel</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <!-- Firebase SDK -->
+    <script src="https://www.gstatic.com/firebasejs/9.22.2/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.22.2/firebase-auth.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.22.2/firebase-firestore.js"></script>
+
+    <script src="src/js/config.js"></script>
+    <script src="src/js/utils.js"></script>
+    <script src="src/js/dashboard.js"></script>
+</body>
+</html>
+
+                            <label class="block text-gold font-bold mb-2">Description</label>
+                            <textarea 
+                                id="productDescription" 
+                                rows="4"
+                                class="w-full px-4 py-3 bg-slate-800 border border-gold/30 rounded-lg text-white focus:outline-none focus:border-gold"
+                            ></textarea>
+                        </div>
+
+                        <button type="submit" class="px-8 py-3 bg-gradient-to-r from-gold to-yellow-300 text-black font-bold rounded-lg hover:shadow-2xl hover:shadow-gold/50 transition">
+                            Add Product
+                        </button>
+                        <p id="formError" class="text-red-400 text-sm mt-2 hidden"></p>
+                        <p id="formSuccess" class="text-green-400 text-sm mt-2 hidden"></p>
+                    </form>
+                </div>
+
+                <!-- Products List Section -->
+                <div>
+                    <h2 class="text-3xl font-bold text-gold mb-8">Manage Products</h2>
+                    <div id="productsList" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                        <div class="flex items-center justify-center col-span-full h-64">
+                            <p class="text-gray-400">Loading products...</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Edit Modal -->
+    <div id="editModal" class="hidden fixed inset-0 bg-black/50 backdrop-blur-sm flex items-center justify-center z-50 p-4">
+        <div class="bg-slate-900 rounded-2xl max-w-2xl w-full border border-gold/30">
+            <div class="flex justify-between items-center p-6 border-b border-gold/20">
+                <h2 class="text-2xl font-bold text-gold">Edit Product</h2>
+                <button onclick="closeEditModal()" class="text-2xl hover:text-gold transition">✕</button>
+            </div>
+            <form id="editForm" class="p-6 space-y-4">
+                <div>
+                    <label class="block text-gold font-bold mb-2">Product Name</label>
+                    <input type="text" id="editName" class="w-full px-4 py-3 bg-slate-800 border border-gold/30 rounded-lg text-white focus:outline-none focus:border-gold">
+                </div>
+                <div>
+                    <label class="block text-gold font-bold mb-2">Price</label>
+                    <input type="number" id="editPrice" step="0.01" class="w-full px-4 py-3 bg-slate-800 border border-gold/30 rounded-lg text-white focus:outline-none focus:border-gold">
+                </div>
+                <div>
+                    <label class="block text-gold font-bold mb-2">Image URL</label>
+                    <input type="url" id="editImage" class="w-full px-4 py-3 bg-slate-800 border border-gold/30 rounded-lg text-white focus:outline-none focus:border-gold">
+                </div>
+                <div>
+                    <label class="block text-gold font-bold mb-2">Description</label>
+                    <textarea id="editDescription" rows="3" class="w-full px-4 py-3 bg-slate-800 border border-gold/30 rounded-lg text-white focus:outline-none focus:border-gold"></textarea>
+                </div>
+                <button type="submit" class="w-full px-6 py-3 bg-gold text-black font-bold rounded-lg hover:bg-yellow-300 transition">
+                    Save Changes
+                </button>
+            </form>
+        </div>
+    </div>
+
+    <!-- Toast Notifications -->
+    <div id="toastContainer" class="fixed bottom-4 right-4 space-y-2 z-40"></div>
+
+    <!-- Firebase SDK -->
+    <script src="https://www.gstatic.com/firebasejs/9.22.2/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.22.2/firebase-auth.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.22.2/firebase-firestore.js"></script>
+
+    <!-- Custom Scripts -->
+    <script src="src/js/config.js"></script>
+    <script src="src/js/utils.js"></script>
+    <script src="src/js/dashboard.js"></script>
+</body>
+</html>
